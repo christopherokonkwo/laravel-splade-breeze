@@ -10,7 +10,7 @@ jobs:
       fail-fast: true
       matrix:
         php: [8.2, 8.1, 8.0]
-        laravel: [9.*]
+        laravel:  [^9, 10.x-dev]
         dependency-version: [prefer-lowest, prefer-stable]
 
     name: Test Stubs ${{ matrix.os }} - P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }}
@@ -25,7 +25,7 @@ jobs:
 
       - name: Setup Laravel
         run: |
-          composer create-project laravel/laravel:^9.3 .
+          composer create-project laravel/laravel:${{ matrix.laravel }}
           composer require protonemedia/laravel-splade-breeze
 
       - name: Remove installed Breeze (Unix)
